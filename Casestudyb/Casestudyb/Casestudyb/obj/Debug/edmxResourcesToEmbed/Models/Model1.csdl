@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FoodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Customerid" />
+    </Key>
+    <Property Name="Customerid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contactnumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Rcity" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pwdwrd" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Orderfoods" Relationship="Self.FK__order_foo__custo__3B75D760" FromRole="Customer" ToRole="Orderfood" />
+    <NavigationProperty Name="Orderstatus" Relationship="Self.FK__orderstat__custo__4222D4EF" FromRole="Customer" ToRole="Orderstatus" />
+  </EntityType>
+  <EntityType Name="Fooditem">
+    <Key>
+      <PropertyRef Name="Foodid" />
+    </Key>
+    <Property Name="Foodid" Type="Int32" Nullable="false" />
+    <Property Name="Foodname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Priceperunit" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Orderfoods" Relationship="Self.FK__order_foo__food___3D5E1FD2" FromRole="Fooditems" ToRole="Orderfood" />
+  </EntityType>
+  <EntityType Name="Orderstatu">
+    <Key>
+      <PropertyRef Name="Orderid" />
+    </Key>
+    <Property Name="Orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customerid" Type="Int32" Nullable="false" />
+    <Property Name="Grandtotal" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="Payment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__orderstat__custo__4222D4EF" FromRole="Orderstatus" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="Restaurantid" />
+    </Key>
+    <Property Name="Restaurantid" Type="Int32" Nullable="false" />
+    <Property Name="Restaurantname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Rcity" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Rlocation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Details" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Branch" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orderfoods" Relationship="Self.FK__order_foo__resta__3C69FB99" FromRole="Restaurant" ToRole="Orderfood" />
+  </EntityType>
+  <EntityType Name="Userpassword">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Usr" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Pwd" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Orderfood">
+    <Key>
+      <PropertyRef Name="OrderFid" />
+      <PropertyRef Name="Customerid" />
+      <PropertyRef Name="Restaurantid" />
+      <PropertyRef Name="Foodid" />
+    </Key>
+    <Property Name="OrderFid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customerid" Type="Int32" Nullable="false" />
+    <Property Name="Restaurantid" Type="Int32" Nullable="false" />
+    <Property Name="Foodid" Type="Int32" Nullable="false" />
+    <Property Name="Paymentmethod" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__order_foo__custo__3B75D760" FromRole="Orderfood" ToRole="Customer" />
+    <NavigationProperty Name="Fooditem" Relationship="Self.FK__order_foo__food___3D5E1FD2" FromRole="Orderfood" ToRole="Fooditems" />
+    <NavigationProperty Name="Restaurant" Relationship="Self.FK__order_foo__resta__3C69FB99" FromRole="Orderfood" ToRole="Restaurant" />
+  </EntityType>
+  <Association Name="FK__order_foo__custo__3B75D760">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Orderfood" Type="Self.Orderfood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customerid" />
+      </Principal>
+      <Dependent Role="Orderfood">
+        <PropertyRef Name="Customerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderstat__custo__4222D4EF">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Orderstatus" Type="Self.Orderstatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customerid" />
+      </Principal>
+      <Dependent Role="Orderstatus">
+        <PropertyRef Name="Customerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_foo__food___3D5E1FD2">
+    <End Role="Fooditems" Type="Self.Fooditem" Multiplicity="1" />
+    <End Role="Orderfood" Type="Self.Orderfood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fooditems">
+        <PropertyRef Name="Foodid" />
+      </Principal>
+      <Dependent Role="Orderfood">
+        <PropertyRef Name="Foodid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_foo__resta__3C69FB99">
+    <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="Orderfood" Type="Self.Orderfood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Restaurantid" />
+      </Principal>
+      <Dependent Role="Orderfood">
+        <PropertyRef Name="Restaurantid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FoodEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Fooditems" EntityType="Self.Fooditem" />
+    <EntitySet Name="Orderstatus" EntityType="Self.Orderstatu" />
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+    <EntitySet Name="Userpasswords" EntityType="Self.Userpassword" />
+    <EntitySet Name="Orderfoods" EntityType="Self.Orderfood" />
+    <AssociationSet Name="FK__order_foo__custo__3B75D760" Association="Self.FK__order_foo__custo__3B75D760">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Orderfood" EntitySet="Orderfoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderstat__custo__4222D4EF" Association="Self.FK__orderstat__custo__4222D4EF">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Orderstatus" EntitySet="Orderstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_foo__food___3D5E1FD2" Association="Self.FK__order_foo__food___3D5E1FD2">
+      <End Role="Fooditems" EntitySet="Fooditems" />
+      <End Role="Orderfood" EntitySet="Orderfoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_foo__resta__3C69FB99" Association="Self.FK__order_foo__resta__3C69FB99">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Orderfood" EntitySet="Orderfoods" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

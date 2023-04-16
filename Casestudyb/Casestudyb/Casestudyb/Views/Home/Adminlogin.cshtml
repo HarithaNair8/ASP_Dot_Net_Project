@@ -1,0 +1,45 @@
+﻿@model Casestudyb.Models.AdminloginModel
+@{
+    ViewBag.Title = "Adminlogin";
+}
+
+<h2>Adminlogin</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div style="border:solid 1px blue; padding: 30px 0 30px 30px; border-radius:5px">
+        <table>
+            <tr>
+                <td valign="top">
+                    @Html.LabelFor(model => model.Usr)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Usr)
+                    <div style="height:20px;">
+                        @Html.ValidationMessageFor(model => model.Usr)
+                    </div>
+                </td>
+
+
+                <td valign="top">
+                    @Html.LabelFor(model => model.Pwd)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Pwd)
+                    <div style="height:20px;">
+                        @Html.ValidationMessageFor(model => model.Pwd)
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}
+

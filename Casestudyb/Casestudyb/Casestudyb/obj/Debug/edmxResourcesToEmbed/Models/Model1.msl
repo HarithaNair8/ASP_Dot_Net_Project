@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FoodModelStoreContainer" CdmEntityContainer="FoodEntities">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="FoodModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+          <ScalarProperty Name="Customername" ColumnName="Customername" />
+          <ScalarProperty Name="Contactnumber" ColumnName="Contactnumber" />
+          <ScalarProperty Name="Rcity" ColumnName="Rcity" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pwdwrd" ColumnName="Pwdwrd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fooditems">
+      <EntityTypeMapping TypeName="FoodModel.Fooditem">
+        <MappingFragment StoreEntitySet="Fooditems">
+          <ScalarProperty Name="Foodid" ColumnName="Foodid" />
+          <ScalarProperty Name="Foodname" ColumnName="Foodname" />
+          <ScalarProperty Name="Priceperunit" ColumnName="Priceperunit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orderstatus">
+      <EntityTypeMapping TypeName="FoodModel.Orderstatu">
+        <MappingFragment StoreEntitySet="Orderstatus">
+          <ScalarProperty Name="Orderid" ColumnName="Orderid" />
+          <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+          <ScalarProperty Name="Grandtotal" ColumnName="Grandtotal" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Restaurants">
+      <EntityTypeMapping TypeName="FoodModel.Restaurant">
+        <MappingFragment StoreEntitySet="Restaurant">
+          <ScalarProperty Name="Restaurantid" ColumnName="Restaurantid" />
+          <ScalarProperty Name="Restaurantname" ColumnName="Restaurantname" />
+          <ScalarProperty Name="Rcity" ColumnName="Rcity" />
+          <ScalarProperty Name="Rlocation" ColumnName="Rlocation" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Userpasswords">
+      <EntityTypeMapping TypeName="FoodModel.Userpassword">
+        <MappingFragment StoreEntitySet="Userpassword">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Usr" ColumnName="Usr" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orderfoods">
+      <EntityTypeMapping TypeName="FoodModel.Orderfood">
+        <MappingFragment StoreEntitySet="Orderfood">
+          <ScalarProperty Name="OrderFid" ColumnName="OrderFid" />
+          <ScalarProperty Name="Customerid" ColumnName="Customerid" />
+          <ScalarProperty Name="Restaurantid" ColumnName="Restaurantid" />
+          <ScalarProperty Name="Foodid" ColumnName="Foodid" />
+          <ScalarProperty Name="Paymentmethod" ColumnName="Paymentmethod" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
